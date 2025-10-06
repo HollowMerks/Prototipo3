@@ -31,7 +31,13 @@ class UsuarioCampusMarketResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return UsuarioCampusMarketsTable::configure($table);
+        return UsuarioCampusMarketsTable::configure($table)
+            ->defaultSort('Apellidos');
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()->with('rol');
     }
 
     public static function getRelations(): array
@@ -47,6 +53,13 @@ class UsuarioCampusMarketResource extends Resource
             'index' => ListUsuarioCampusMarkets::route('/'),
             'create' => CreateUsuarioCampusMarket::route('/create'),
             'edit' => EditUsuarioCampusMarket::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            \App\Http\Livewire\ShowProfilePhoto::class,
         ];
     }
 }

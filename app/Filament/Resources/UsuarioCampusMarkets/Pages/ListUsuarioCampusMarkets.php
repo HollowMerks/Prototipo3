@@ -16,4 +16,6 @@ class ListUsuarioCampusMarkets extends ListRecords
             CreateAction::make(),
         ];
     }
+
+    // Removed getTableQuery override to fix error
 }
