@@ -10,12 +10,13 @@ class ListUsuarioCampusMarkets extends ListRecords
 {
     protected static string $resource = UsuarioCampusMarketResource::class;
 
+    // Remove custom view to use default table view
+    // protected string $view = 'filament.resources.usuario-campus-markets-resource.pages.list-usuario-campus-markets';
+
     protected function getHeaderActions(): array
     {
         return [
             CreateAction::make(),
         ];
     }
-
-    // Removed getTableQuery override to fix error
 }
