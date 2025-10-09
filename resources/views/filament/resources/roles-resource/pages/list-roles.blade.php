@@ -17,7 +17,7 @@
             @foreach ($this->getTableRecords() as $record)
                 <x-user-card
                     :imageUrl="null"
-                    :badge="$record->Nombre_Rol"
+                    :badge="$record->NNombre_Rol"
                     :title="$record->Nombre_Rol"
                     :footer="$record->Descripcion"
                     :backContent="$record->Descripcion"

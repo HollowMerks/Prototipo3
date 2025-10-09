@@ -44,6 +44,14 @@ class UsuarioCampusMarketsTable
                     ->label('Rol')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('Genero')
+                    ->label('Género')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('Telefono')
+                    ->label('Teléfono')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
