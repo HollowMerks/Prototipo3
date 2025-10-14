@@ -52,7 +52,7 @@ class UsuarioCampusMarketsTable
                     ->label('Teléfono')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('Carrera.Nombre_Carrera')
+                TextColumn::make('carrera.Nombre_Carrera')
                     ->label('Carrera')
                     ->sortable()
                     ->searchable(),

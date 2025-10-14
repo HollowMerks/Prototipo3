@@ -67,4 +67,9 @@ class UsuariosCampusMarket extends Authenticatable
     {
         return $this->belongsTo(Roles::class, 'Cod_Rol', 'Cod_Rol');
     }
+
+    public function carrera()
+    {
+        return $this->belongsTo(Carrera::class, 'Cod_Carrera', 'Cod_Carrera');
+    }
 }

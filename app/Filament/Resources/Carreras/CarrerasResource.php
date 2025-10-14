@@ -32,6 +32,11 @@ class CarrerasResource extends Resource
         return CarrerasTable::configure($table);
     }
 
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()->with('universidad');
+    }
+
     public static function getRelations(): array
     {
         return [

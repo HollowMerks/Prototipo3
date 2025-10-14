@@ -13,7 +13,14 @@ class CarrerasTable
     {
         return $table
             ->columns([
-                //
+                \Filament\Tables\Columns\TextColumn::make('Nombre_Carrera')
+                    ->label('Nombre de la Carrera')
+                    ->sortable()
+                    ->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('universidad.Nombre_Universidad')
+                    ->label('Universidad')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //

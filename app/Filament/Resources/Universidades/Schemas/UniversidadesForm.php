@@ -38,12 +38,14 @@ class UniversidadesForm
                 Forms\Components\FileUpload::make('Universisdad_foto_de_portada')
                     ->label('Foto de Portada')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
                     ->directory('universidades/portadas')
                     ->columnSpanFull(),
 
                 Forms\Components\FileUpload::make('Universisdad_foto_de_perfil')
                     ->label('Foto de Perfil')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
                     ->directory('universidades/perfiles')
                     ->columnSpanFull(),
 
@@ -56,6 +58,7 @@ class UniversidadesForm
                 Forms\Components\Textarea::make('Descripcion')
                     ->label('Descripción')
                     ->maxLength(65535)
+                    ->rules(['max:65535'])
                     ->columnSpanFull(),
 
                 Forms\Components\TimePicker::make('Hora_apertura')

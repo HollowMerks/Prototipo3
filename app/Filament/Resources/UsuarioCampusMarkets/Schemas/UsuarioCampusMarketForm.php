@@ -70,6 +70,10 @@ class UsuarioCampusMarketForm
                     ])
                     ->default(3)
                     ->required(),
+                Select::make('Cod_Carrera')
+                    ->label('Carrera')
+                    ->relationship('carrera', 'Nombre_Carrera')
+                    ->required(),
             ]);
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('Universisdad_foto_de_portada')->nullable();
             $table->string('Universisdad_foto_de_perfil')->nullable();
             $table->string('Sitio_Web')->nullable();
-            $table->string('Descripcion')->nullable();
+            $table->text('Descripcion')->nullable();
             $table->date('Hora_apertura')->nullable();
             $table->date('Hora_cierre')->nullable();
             $table->timestamps();
