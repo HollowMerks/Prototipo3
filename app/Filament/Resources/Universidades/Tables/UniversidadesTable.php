@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 
 class UniversidadesTable
@@ -14,6 +15,16 @@ class UniversidadesTable
     {
         return $table
             ->columns([
+                ImageColumn::make('Universisdad_foto_de_perfil')
+                    ->label('Foto de perfil')
+                    ->circular()
+                    ->size(50)
+                    ->extraAttributes(function ($record) {
+                        return [
+                            'wire:click' => "Livewire.emit('showPhoto', '".url('storage/'.$record->Logo_Universidad)."')",
+                            'style' => 'cursor:pointer',
+                        ];
+                    }),
                 Tables\Columns\TextColumn::make('Nombre_Universidad')
                     ->label('Nombre')
                     ->searchable()

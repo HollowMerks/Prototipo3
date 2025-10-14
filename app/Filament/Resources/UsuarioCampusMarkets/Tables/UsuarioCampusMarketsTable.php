@@ -40,7 +40,7 @@ class UsuarioCampusMarketsTable
                 TextColumn::make('Estado')
                     ->label('Estado')
                     ->sortable(),
-                TextColumn::make('rol.Nombre_Rol')
+                TextColumn::make('Nombre_Rol')
                     ->label('Rol')
                     ->sortable()
                     ->searchable(),
@@ -56,6 +56,7 @@ class UsuarioCampusMarketsTable
                     ->label('Carrera')
                     ->sortable()
                     ->searchable(),
+
             ])
             ->filters([
                 //
