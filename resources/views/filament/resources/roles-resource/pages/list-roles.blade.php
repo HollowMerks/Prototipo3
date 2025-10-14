@@ -13,7 +13,7 @@
     </div>
 
     <div class="fi-resource-list-records-page-content">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div class="flex flex-row flex-nowrap justify-start gap-6 overflow-x-auto">
             @foreach ($this->getTableRecords() as $record)
                 <x-user-card
                     :imageUrl="null"
@@ -21,6 +21,7 @@
                     :title="$record->Nombre_Rol"
                     :footer="$record->Descripcion"
                     :backContent="$record->Descripcion"
+                    class="flex-shrink-0"
                 />
             @endforeach
         </div>
