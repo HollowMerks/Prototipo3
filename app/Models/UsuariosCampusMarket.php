@@ -30,6 +30,7 @@ class UsuariosCampusMarket extends Authenticatable
         'Foto_de_portada',
         'Foto_de_perfil',
         'Cod_Rol',
+        'Cod_Carrera',
     ];
 
     protected $hidden = [
