@@ -56,6 +56,10 @@ class UsuarioCampusMarketsTable
                     ->label('Carrera')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('Cod_Universidad')
+                    ->label('Universidad')
+                    ->sortable()
+                    ->searchable(),
 
             ])
             ->filters([
