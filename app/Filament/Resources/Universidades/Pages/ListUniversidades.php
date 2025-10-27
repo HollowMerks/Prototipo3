@@ -10,10 +10,15 @@ class ListUniversidades extends ListRecords
 {
     protected static string $resource = UniversidadesResource::class;
 
+    protected string $view = 'filament.resources.universidades-resource.pages.list-universidades';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Crear Nueva Universidad')
+                ->slideOver(false),
         ];
+
     }
 }

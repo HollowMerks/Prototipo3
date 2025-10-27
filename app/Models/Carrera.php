@@ -18,6 +18,9 @@ class Carrera extends Model
     protected $fillable = [
         'Nombre_Carrera',
         'Cod_Universidad',
+        'Foto_Carrera',
+        'Descripcion_Carrera',
+        'Duracion_Carrera',
     ];
 
     protected $casts = [

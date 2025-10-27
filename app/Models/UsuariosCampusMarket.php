@@ -31,6 +31,7 @@ class UsuariosCampusMarket extends Authenticatable
         'Foto_de_perfil',
         'Cod_Rol',
         'Cod_Carrera',
+        'Cod_Universidad',
     ];
 
     protected $hidden = [
@@ -71,5 +72,10 @@ class UsuariosCampusMarket extends Authenticatable
     public function carrera()
     {
         return $this->belongsTo(Carrera::class, 'Cod_Carrera', 'Cod_Carrera');
+    }
+
+    public function universidad()
+    {
+        return $this->belongsTo(Universidades::class, 'Cod_Universidad', 'Cod_Universidad');
     }
 }

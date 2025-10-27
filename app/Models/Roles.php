@@ -17,5 +17,6 @@ class Roles extends Model
     protected $fillable = [
         'Nombre_Rol',
         'Descripcion',
+        'Foto_Rol',
     ];
 }

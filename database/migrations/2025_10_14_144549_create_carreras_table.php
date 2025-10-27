@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id('Cod_Carrera');
             $table->string('Nombre_Carrera', 120);
             $table->foreignId('Cod_Universidad')->constrained('universidades', 'Cod_Universidad');
+            $table->string('Foto_Carrera')->nullable();
+            $table->string('Descripcion_Carrera')->nullable();
+            $table->string('Duracion_Carrera')->nullable();
             $table->timestamps();
         });
     }

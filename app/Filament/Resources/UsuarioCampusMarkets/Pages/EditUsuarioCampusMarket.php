@@ -21,4 +21,22 @@ class EditUsuarioCampusMarket extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        // Mantener la contraseña para mostrarla al editar
+        // No hacer unset aquí
+
+        return $data;
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        // Si la contraseña está vacía, no la actualices
+        if (empty($data['Contrasena'])) {
+            unset($data['Contrasena']);
+        }
+
+        return $data;
+    }
 }

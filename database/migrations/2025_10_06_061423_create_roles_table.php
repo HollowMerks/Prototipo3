@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('Cod_Rol');
             $table->enum('Nombre_Rol', ['SuperAdministrador', 'Moderador', 'Estudiante'])->default('Estudiante');
             $table->string('Descripcion')->nullable();
+            $table->string('Foto_Rol')->nullable();
             $table->timestamps();
         });
     }

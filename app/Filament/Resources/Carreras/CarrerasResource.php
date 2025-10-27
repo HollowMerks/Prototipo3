@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Carreras;
 
-use App\Filament\Resources\Carreras\Pages\CreateCarreras;
 use App\Filament\Resources\Carreras\Pages\EditCarreras;
 use App\Filament\Resources\Carreras\Pages\ListCarreras;
 use App\Filament\Resources\Carreras\Schemas\CarrerasForm;
@@ -48,7 +47,6 @@ class CarrerasResource extends Resource
     {
         return [
             'index' => ListCarreras::route('/'),
-            'create' => CreateCarreras::route('/create'),
             'edit' => EditCarreras::route('/{record}/edit'),
         ];
     }

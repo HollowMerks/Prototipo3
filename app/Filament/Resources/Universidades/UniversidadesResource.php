@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Universidades;
 
-use App\Filament\Resources\Universidades\Pages\CreateUniversidades;
 use App\Filament\Resources\Universidades\Pages\EditUniversidades;
 use App\Filament\Resources\Universidades\Pages\ListUniversidades;
 use App\Filament\Resources\Universidades\Schemas\UniversidadesForm;
@@ -43,7 +42,6 @@ class UniversidadesResource extends Resource
     {
         return [
             'index' => ListUniversidades::route('/'),
-            'create' => CreateUniversidades::route('/create'),
             'edit' => EditUniversidades::route('/{record}/edit'),
         ];
     }

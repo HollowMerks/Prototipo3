@@ -21,7 +21,7 @@ class UsuarioCampusMarketsTable
                     ->size(50)
                     ->extraAttributes(function ($record) {
                         return [
-                            'wire:click' => "Livewire.emit('showPhoto', '".url('storage/'.$record->Foto_de_perfil)."')",
+                            'wire:click.prevent' => "Livewire.emit('showPhoto', '".url('storage/'.$record->Foto_de_perfil)."')",
                             'style' => 'cursor:pointer',
                         ];
                     }),
@@ -40,10 +40,16 @@ class UsuarioCampusMarketsTable
                 TextColumn::make('Estado')
                     ->label('Estado')
                     ->sortable(),
-                TextColumn::make('Nombre_Rol')
+                TextColumn::make('Cod_Rol')
                     ->label('Rol')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        1 => 'SuperAdministrador',
+                        2 => 'Moderador',
+                        3 => 'Estudiante',
+                        default => 'Desconocido',
+                    }),
                 TextColumn::make('Genero')
                     ->label('Género')
                     ->sortable()
@@ -56,18 +62,26 @@ class UsuarioCampusMarketsTable
                     ->label('Carrera')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('carrera.universidad.Nombre_Universidad')
+                    ->label('Universidad')
+                    ->sortable()
+                    ->searchable(),
 
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                // EditAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
+            ])
+            ->actions([
+                EditAction::make(),
             ]);
+
     }
 }

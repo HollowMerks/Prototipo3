@@ -25,6 +25,16 @@ class CarrerasForm
                     ->searchable()
                     ->preload()
                     ->columnSpanFull(),
+                Forms\Components\FileUpload::make('Foto_Carrera')
+                    ->label('Foto de la Carrera')
+                    ->image()
+                    ->nullable()
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('Descripcion_Carrera')
+                    ->label('Descripción de la Carrera')
+                    ->nullable()
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('Duracion_Carrera'),
             ]);
     }
 }

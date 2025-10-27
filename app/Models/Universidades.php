@@ -24,7 +24,7 @@ class Universidades extends Model
     ];
 
     protected $casts = [
-        'Hora_apertura' => 'date',
-        'Hora_cierre' => 'date',
+        'Hora_apertura' => 'datetime:H:i:s',
+        'Hora_cierre' => 'datetime:H:i:s',
     ];
 }

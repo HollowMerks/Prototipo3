@@ -10,10 +10,14 @@ class ListCarreras extends ListRecords
 {
     protected static string $resource = CarrerasResource::class;
 
+    protected string $view = 'filament.resources.carreras-resource.pages.list-carreras';
+
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('Crear Nueva Carrera')
+                ->slideOver(false),
         ];
     }
 }

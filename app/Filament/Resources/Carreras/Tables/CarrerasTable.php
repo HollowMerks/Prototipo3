@@ -21,6 +21,14 @@ class CarrerasTable
                     ->label('Universidad')
                     ->sortable()
                     ->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('Duracion_Carrera')
+                    ->label('Duración de la Carrera')
+                    ->sortable()
+                    ->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('Descripcion_Carrera')
+                    ->label('Descripción de la Carrera')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //

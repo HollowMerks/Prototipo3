@@ -26,6 +26,11 @@ class RolesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('Foto_Rol')
+                    ->searchable(),
+                TextColumn::make('Descripcion')
+                    ->searchable(),
+
             ])
             ->filters([
                 //

@@ -181,7 +181,7 @@
     </div>
     <div class="front">
       @if($imageUrl)
-        <img class="img" src="{{ $imageUrl }}" alt="Profile Photo">
+        <img class="img" src="{{ $imageUrl }}" alt="Profile Photo" wire:click.prevent="Livewire.emit('showPhoto', '{{ $imageUrl }}')" style="cursor:pointer">
       @else
         <div class="img">
           <div class="circle"></div>

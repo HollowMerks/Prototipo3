@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('Universisdad_foto_de_perfil')->nullable();
             $table->string('Sitio_Web')->nullable();
             $table->text('Descripcion')->nullable();
-            $table->date('Hora_apertura')->nullable();
-            $table->date('Hora_cierre')->nullable();
+            $table->time('Hora_apertura')->nullable();
+            $table->time('Hora_cierre')->nullable();
             $table->timestamps();
         });
     }

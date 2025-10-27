@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('Foto_de_portada')->nullable();
             $table->string('Foto_de_perfil')->nullable();
             $table->foreignId('Cod_Rol')->default(3)->constrained('roles', 'Cod_Rol');
-            $table->foreignId('Cod_Carrera')->constrained('Carrera', 'Cod_Universidad');
+            $table->foreignId('Cod_Carrera')->constrained('carreras', 'Cod_Carrera');
+            $table->foreignId('Cod_Universidad')->constrained('universidades', 'Cod_Universidad');
             $table->timestamps();
         });
     }

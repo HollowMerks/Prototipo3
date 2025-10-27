@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\UsuarioCampusMarkets;
 
-use App\Filament\Resources\UsuarioCampusMarkets\Pages\CreateUsuarioCampusMarket;
 use App\Filament\Resources\UsuarioCampusMarkets\Pages\EditUsuarioCampusMarket;
 use App\Filament\Resources\UsuarioCampusMarkets\Pages\ListUsuarioCampusMarkets;
 use App\Filament\Resources\UsuarioCampusMarkets\Schemas\UsuarioCampusMarketForm;
@@ -37,7 +36,7 @@ class UsuarioCampusMarketResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
-        return parent::getEloquentQuery()->with('rol', 'carrera');
+        return parent::getEloquentQuery()->with('rol', 'carrera', 'carrera.universidad');
     }
 
     public static function getRelations(): array
@@ -51,7 +50,6 @@ class UsuarioCampusMarketResource extends Resource
     {
         return [
             'index' => ListUsuarioCampusMarkets::route('/'),
-            'create' => CreateUsuarioCampusMarket::route('/create'),
             'edit' => EditUsuarioCampusMarket::route('/{record}/edit'),
         ];
     }

@@ -46,8 +46,7 @@ class UsuarioCampusMarketForm
                     ->maxLength(120),
                 TextInput::make('Contrasena')
                     ->label('Contraseña')
-                    ->password()
-                    ->required()
+                    ->required(fn ($context) => $context === 'create')
                     ->maxLength(255),
                 TextInput::make('Telefono')
                     ->label('Teléfono')
@@ -73,6 +72,10 @@ class UsuarioCampusMarketForm
                 Select::make('Cod_Carrera')
                     ->label('Carrera')
                     ->relationship('carrera', 'Nombre_Carrera')
+                    ->required(),
+                Select::make('Cod_Universidad')
+                    ->label('Universidad')
+                    ->relationship('universidad', 'Nombre_Universidad')
                     ->required(),
             ]);
     }
