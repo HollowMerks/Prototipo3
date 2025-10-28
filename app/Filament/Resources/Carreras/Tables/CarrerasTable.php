@@ -13,6 +13,10 @@ class CarrerasTable
     {
         return $table
             ->columns([
+                \Filament\Tables\Columns\ImageColumn::make('Foto_Carrera')
+                    ->label('Imagen de la Carrera')
+                    ->rounded()
+                    ->size(50),
                 \Filament\Tables\Columns\TextColumn::make('Nombre_Carrera')
                     ->label('Nombre de la Carrera')
                     ->sortable()

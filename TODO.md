@@ -1,0 +1,3 @@
+- [x] Cambiar AdminNotificationResource.php para usar Forms\Form en lugar de Schemas\Schema
+- [x] Editar AdminNotificationForm.php para agregar campos de formulario con lógica condicional
+- [x] Editar CreateAdminNotification.php para manejar creación múltiple de notificaciones según tipo de envío

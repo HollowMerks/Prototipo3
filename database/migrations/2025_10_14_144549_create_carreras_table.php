@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('carreras', function (Blueprint $table) {
             $table->id('Cod_Carrera');
             $table->string('Nombre_Carrera', 120);
-            $table->foreignId('Cod_Universidad')->constrained('universidades', 'Cod_Universidad');
+            $table->unsignedBigInteger('Cod_Universidad');
             $table->string('Foto_Carrera')->nullable();
             $table->string('Descripcion_Carrera')->nullable();
             $table->string('Duracion_Carrera')->nullable();
             $table->timestamps();
+
+            $table->foreign('Cod_Universidad')->references('Cod_Universidad')->on('universidades');
         });
     }
 

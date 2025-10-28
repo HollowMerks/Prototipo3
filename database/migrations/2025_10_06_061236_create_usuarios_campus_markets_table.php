@@ -22,10 +22,14 @@ return new class extends Migration
             $table->string('Telefono')->nullable();
             $table->string('Foto_de_portada')->nullable();
             $table->string('Foto_de_perfil')->nullable();
-            $table->foreignId('Cod_Rol')->default(3)->constrained('roles', 'Cod_Rol');
-            $table->foreignId('Cod_Carrera')->constrained('carreras', 'Cod_Carrera');
-            $table->foreignId('Cod_Universidad')->constrained('universidades', 'Cod_Universidad');
+            $table->unsignedBigInteger('Cod_Rol')->default(3);
+            $table->unsignedBigInteger('Cod_Carrera');
+            $table->unsignedBigInteger('Cod_Universidad');
             $table->timestamps();
+
+            $table->foreign('Cod_Rol')->references('Cod_Rol')->on('roles');
+            $table->foreign('Cod_Carrera')->references('Cod_Carrera')->on('carreras');
+            $table->foreign('Cod_Universidad')->references('Cod_Universidad')->on('universidades');
         });
     }
 
