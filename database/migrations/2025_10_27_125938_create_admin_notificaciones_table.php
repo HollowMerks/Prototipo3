@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('Titulo_Notificacion', 150);
             $table->text('Mensaje_Notificacion');
             $table->string('imgen')->nullable();
-            $table->string('icono')->nullable();
-            $table->string('link');
             $table->enum('Estado_Notificacion', ['Pendiente', 'Enviado', 'Fallo'])->default('Pendiente');
             $table->timestamp('Fecha_Envio')->nullable();
             $table->timestamps();

@@ -3,10 +3,12 @@
 namespace App\Filament\Resources\AdminNotifications\Pages;
 
 use App\Filament\Resources\AdminNotifications\AdminNotificationResource;
+use App\Mail\AdminNotificationMail;
 use App\Models\Admin_notificaciones;
 use App\Models\UsuariosCampusMarket;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class CreateAdminNotification extends CreateRecord
 {
@@ -33,9 +35,16 @@ class CreateAdminNotification extends CreateRecord
         $notificaciones = [];
 
         foreach ($usuarios as $usuario) {
-            $notificaciones[] = Admin_notificaciones::create(array_merge($data, [
+            $notificacion = Admin_notificaciones::create(array_merge($data, [
                 'ID_Usuario' => $usuario->ID_Usuario,
             ]));
+
+            // Enviar correo electrónico
+            if ($usuario->Correo_Electronico) {
+                Mail::to($usuario->Correo_Electronico)->send(new AdminNotificationMail($notificacion));
+            }
+
+            $notificaciones[] = $notificacion;
         }
 
         // Retornar la primera notificación creada para compatibilidad con Filament

@@ -25,7 +25,6 @@ class AdminNotificationForm
                     ->default('specific_user')
                     ->required()
                     ->live(),
-
                 Select::make('ID_Usuario')
                     ->label('Seleccionar Usuario')
                     ->options(UsuariosCampusMarket::all()->pluck('Nombres', 'ID_Usuario'))
@@ -53,15 +52,6 @@ class AdminNotificationForm
                     ->label('Imagen')
                     ->image()
                     ->directory('notificaciones'),
-
-                TextInput::make('icono')
-                    ->label('Icono (Heroicon)')
-                    ->placeholder('heroicon-o-bell'),
-
-                TextInput::make('link')
-                    ->label('Enlace')
-                    ->url()
-                    ->required(),
             ]);
     }
 }

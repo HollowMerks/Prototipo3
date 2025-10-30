@@ -15,8 +15,6 @@ class Admin_notificaciones extends Model
         'Titulo_Notificacion',
         'Mensaje_Notificacion',
         'imgen',
-        'icono',
-        'link',
         'Estado_Notificacion',
         'Fecha_Envio',
     ];
