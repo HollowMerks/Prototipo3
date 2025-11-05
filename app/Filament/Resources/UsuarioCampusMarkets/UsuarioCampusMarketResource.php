@@ -23,6 +23,8 @@ class UsuarioCampusMarketResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
 
+    // protected static ?string $navigationGroup = 'Academico';
+
     public static function form(Schema $schema): Schema
     {
         return UsuarioCampusMarketForm::configure($schema);
