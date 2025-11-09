@@ -19,25 +19,25 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class UniversidadCampusPanelProvider extends PanelProvider
+class EstudiantesPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('universidad-campus')
-            ->path('universidad-campus')
+            ->id('estudiantes')
+            ->path('estudiantes')
             ->login()
             ->registration()
             ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/UniversidadCampus/Resources'), for: 'App\Filament\UniversidadCampus\Resources')
-            ->discoverPages(in: app_path('Filament/UniversidadCampus/Pages'), for: 'App\Filament\UniversidadCampus\Pages')
+            ->discoverResources(in: app_path('Filament/Estudiantes/Resources'), for: 'App\Filament\Estudiantes\Resources')
+            ->discoverPages(in: app_path('Filament/Estudiantes/Pages'), for: 'App\Filament\Estudiantes\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/UniversidadCampus/Widgets'), for: 'App\Filament\UniversidadCampus\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Estudiantes/Widgets'), for: 'App\Filament\Estudiantes\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
