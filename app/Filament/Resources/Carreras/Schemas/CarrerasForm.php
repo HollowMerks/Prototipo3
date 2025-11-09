@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Carreras\Schemas;
 
+use App\Filament\Resources\Universidades\Schemas\UniversidadesForm;
 use App\Models\Universidades;
 use Filament\Forms;
 use Filament\Schemas\Schema;
@@ -24,6 +25,7 @@ class CarrerasForm
                     ->required()
                     ->searchable()
                     ->preload()
+                    ->createOptionForm(fn (Schema $form) => UniversidadesForm::configure($form))
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('Foto_Carrera')
                     ->label('Foto de la Carrera')
