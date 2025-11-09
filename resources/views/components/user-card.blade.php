@@ -3,6 +3,7 @@
   overflow: visible;
   width: 190px;
   height: 254px;
+  display: inline-block; / para que se alinee horizontalmente */
 }
 
 .content {

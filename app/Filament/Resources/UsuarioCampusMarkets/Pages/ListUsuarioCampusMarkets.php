@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\UsuarioCampusMarkets\Pages;
 
 use App\Filament\Resources\UsuarioCampusMarkets\UsuarioCampusMarketResource;
-use Filament\Actions\CreateAction;
+use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListUsuarioCampusMarkets extends ListRecords
@@ -15,8 +15,18 @@ class ListUsuarioCampusMarkets extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
+            Actions\CreateAction::make()
                 ->label('Crear Nuevo Usuario Campus Market'),
+
+            Actions\Action::make('reporte_pdf')
+                ->label(' Descargar PDF')
+                ->url(route('reporte.usuarios.pdf'))
+                ->openUrlInNewTab(),
+
+            Actions\Action::make('reporte_excel')
+                ->label(' Descargar Excel')
+                ->url(route('reporte.usuarios.excel'))
+                ->openUrlInNewTab(),
         ];
     }
 }

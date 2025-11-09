@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Roles\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -12,14 +13,20 @@ class RolesForm
     {
         return $schema
             ->components([
-                TextInput::make('Nombre_Rol')
+                Select::make('Nombre_Rol')
                     ->label('Nombre del Rol')
-                    ->required()
-                    ->unique(table: 'roles', column: 'Nombre_Rol', ignoreRecord: true)
-                    ->maxLength(255),
+                    ->options([
+                        'SuperAdministrador' => 'SuperAdministrador',
+                        'Moderador' => 'Moderador',
+                        'Estudiante' => 'Estudiante',
+                    ])
+                    ->default('Estudiante')
+                    ->required(),
+
                 TextInput::make('Descripcion')
                     ->maxLength(255)
                     ->nullable(),
+
                 FileUpload::make('Foto_Rol')
                     ->image()
                     ->nullable()
