@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class ForoResource extends Resource
 {
@@ -21,6 +22,8 @@ class ForoResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInformationCircle;
 
     protected static ?string $recordTitleAttribute = 'Titulo_Foro';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Contenido y Comunidad';
 
     public static function form(Schema $schema): Schema
     {

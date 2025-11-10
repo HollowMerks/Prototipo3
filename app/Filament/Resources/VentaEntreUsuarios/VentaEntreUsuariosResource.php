@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class VentaEntreUsuariosResource extends Resource
 {
@@ -21,6 +22,8 @@ class VentaEntreUsuariosResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
 
     protected static ?string $recordTitleAttribute = 'ID_Venta';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Marketplace';
 
     public static function form(Schema $schema): Schema
     {

@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UsuarioCampusMarketResource extends Resource
 {
@@ -21,9 +22,13 @@ class UsuarioCampusMarketResource extends Resource
 
     protected static ?string $modelLabel = 'Usuario CampusMarket';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
 
-    // protected static ?string $navigationGroup = 'Academico';
+    protected static ?string $pluralModelLabel = 'Usuarios CampusMarket';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Gestión de usuarios';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

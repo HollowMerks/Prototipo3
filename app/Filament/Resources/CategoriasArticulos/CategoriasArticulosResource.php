@@ -13,12 +13,15 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class CategoriasArticulosResource extends Resource
 {
     protected static ?string $model = CategoriasArticulos::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars3BottomRight;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Contenido y Comunidad';
 
     public static function form(Schema $schema): Schema
     {

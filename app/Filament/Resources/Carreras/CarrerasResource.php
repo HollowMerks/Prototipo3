@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class CarrerasResource extends Resource
 {
@@ -20,6 +21,8 @@ class CarrerasResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmarkSquare;
 
     protected static ?string $navigationLabel = 'Carreras';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Academico';
 
     public static function form(Schema $schema): Schema
     {
