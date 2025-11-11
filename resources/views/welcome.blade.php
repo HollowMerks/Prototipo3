@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Market - La Paz, Bolivia</title>
-    <link rel="stylesheet" href="campus-market.css">
+    <link rel="stylesheet" href="{{ asset('css/campus-market.css') }}">
 </head>
 <body class="container">
     <nav class="navbar">
@@ -24,7 +24,7 @@
             <div class="flag-badge">
                 <div class="bolivia-flag"></div>
                 <span class="badge-text">Inicia sesión o registate</span>
-                <button onclick="window.location.href='http://localhost:8000/estudiantes'">
+                <button onclick="window.location.href='{{ url('/auth/google') }}'">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 36 36"
@@ -1336,62 +1336,431 @@
       }
     }
 
+    /* Tablet and smaller screens */
+    @media (max-width: 1024px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    }
+
+    /* Mobile landscape and smaller tablets */
     @media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
     .nav-container {
         flex-direction: column;
         gap: 1rem;
+        padding: 0.5rem 0;
     }
 
     .nav-links {
         gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        background: rgba(45, 125, 125, 0.1);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        background: var(--accent-teal);
+        color: var(--text-primary);
     }
 
     .flag-badge {
         order: -1;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .badge-text {
+        font-size: 0.7rem;
+    }
+
+    .hero-section {
+        height: 90vh;
+        padding: 2rem 1rem;
     }
 
     .hero-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.8rem;
     }
 
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .hero-glow {
+        width: 300px;
+        height: 300px;
     }
 
     .section-title {
         font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-description {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    .about-section,
+    .features-section,
+    .benefits-section,
+    .contact-section {
+        padding: 4rem 1rem;
+        min-height: auto;
+    }
+
+    .container-content {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .stat-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .stat-label {
+        font-size: 1rem;
     }
 
     .features-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .feature-card {
+        padding: 2rem 1.5rem;
+        text-align: center;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+    }
+
+    .feature-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .feature-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .benefits-list {
+        margin: 2rem auto 0;
+        padding: 0 1rem;
+    }
+
+    .benefit-item {
+        padding: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .benefit-check {
+        font-size: 1.3rem;
+    }
+
+    .benefit-text {
+        font-size: 0.95rem;
     }
 
     .social-container {
         column-gap: 20px;
+        margin: 2rem 0;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .icon {
         width: 50px;
         height: 50px;
     }
+
+    .icon svg {
+        width: 25px;
     }
 
+    button {
+        font-size: 14px;
+        padding: 0 8px;
+        min-height: 44px; /* Touch-friendly */
+    }
+
+    .footer-info {
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+
+    .footer-slogan {
+        font-size: 1rem;
+    }
+    }
+
+    /* Small mobile phones */
     @media (max-width: 480px) {
     .navbar {
-        padding: 1rem;
+        padding: 0.8rem 1rem;
     }
 
-    .hero-title {
-        font-size: 2rem;
+    .nav-container {
+        gap: 0.8rem;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .logo-icon {
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        gap: 0.8rem;
+    }
+
+    .nav-links a {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .flag-badge {
+        padding: 0.3rem 0.6rem;
     }
 
     .badge-text {
         font-size: 0.65rem;
     }
 
+    .hero-section {
+        height: 85vh;
+        padding: 1rem 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+        letter-spacing: 0.03em;
+        margin-bottom: 0.6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+        padding: 0 0.5rem;
+    }
+
+    .hero-glow {
+        width: 250px;
+        height: 250px;
+    }
+
+    .scroll-indicator {
+        bottom: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .section-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .about-section,
+    .features-section,
+    .benefits-section,
+    .contact-section {
+        padding: 3rem 0.5rem;
+    }
+
+    .container-content {
+        padding: 0 0.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+    }
+
+    .stat-card {
+        padding: 1.2rem 0.8rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    .features-grid {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .feature-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .feature-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .benefits-list {
+        margin: 1.5rem auto 0;
+        padding: 0 0.5rem;
+    }
+
+    .benefit-item {
+        padding: 1rem 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .benefit-check {
+        font-size: 1.2rem;
+    }
+
+    .benefit-text {
+        font-size: 0.9rem;
+    }
+
     .social-container {
-        flex-wrap: wrap;
+        column-gap: 15px;
+        margin: 1.5rem 0;
         gap: 15px;
+    }
+
+    .icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .icon svg {
+        width: 22px;
+    }
+
+    button {
+        font-size: 13px;
+        padding: 0 6px;
+        min-height: 40px;
+        letter-spacing: 0.5px;
+    }
+
+    .footer-info {
+        margin-top: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .footer-info p {
+        margin: 0.3rem 0;
+    }
+
+    .footer-slogan {
+        font-size: 0.95rem;
+    }
+    }
+
+    /* Very small screens */
+    @media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-container {
+        column-gap: 10px;
+        gap: 10px;
+    }
+
+    .icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .icon svg {
+        width: 20px;
+    }
+
+    button {
+        font-size: 12px;
+        min-height: 38px;
     }
     }
 

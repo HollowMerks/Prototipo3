@@ -3,7 +3,8 @@ APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=base64:zEeEVwdO2IrqScJ/Q0mTfCdhETQImedD7CUiAfuURTQ=
 APP_DEBUG=true
-APP_URL=http://localhost
+APP_URL=https://concretely-unhelped-afton.ngrok-free.dev
+GOOGLE_REDIRECT_URI=https://concretely-unhelped-afton.ngrok-free.dev/auth/google/callback
 
 APP_LOCALE=en
 APP_FALLBACK_LOCALE=en

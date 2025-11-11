@@ -55,6 +55,7 @@ class EstudiantesPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->loginRouteSlug('estudiantes/login');
     }
 }
