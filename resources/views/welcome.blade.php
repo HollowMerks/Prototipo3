@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Market - La Paz, Bolivia</title>
-    <link rel="stylesheet" href="{{ asset('css/campus-market.css') }}">
+    @vite('resources/css/campus-market.css')
 </head>
 <body class="container">
     <nav class="navbar">
@@ -24,7 +24,7 @@
             <div class="flag-badge">
                 <div class="bolivia-flag"></div>
                 <span class="badge-text">Inicia sesión o registate</span>
-                <button onclick="window.location.href='{{ url('/auth/google') }}'">
+                <button onclick="window.location.href='{{ url('/estudiantes/login') }}'">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 36 36"

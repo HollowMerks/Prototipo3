@@ -1,0 +1,96 @@
+/* Estilos específicos para el login de Filament - Campus Market */
+
+:root {
+    --dark-bg: #0a0e27;
+    --darker-bg: #060914;
+    --accent-teal: #2d7d7d;
+    --accent-light: #3a9d9d;
+    --text-primary: #ffffff;
+    --text-secondary: #a8b2d1;
+    --card-bg: #222222;
+    --glow-color: rgba(45, 125, 125, 0.3);
+}
+
+/* Fondo de la página */
+body {
+    background-color: var(--dark-bg) !important;
+    color: var(--text-primary) !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Contenedor principal del login */
+.flex.min-h-screen {
+    background-color: var(--dark-bg) !important;
+}
+
+/* Título */
+h2 {
+    color: var(--text-primary) !important;
+}
+
+/* Subtítulo */
+p.text-sm {
+    color: var(--text-secondary) !important;
+}
+
+/* Botón de Google */
+a.group.relative {
+    background-color: var(--card-bg) !important;
+    border-color: var(--accent-teal) !important;
+    color: var(--text-primary) !important;
+}
+
+a.group.relative:hover {
+    background-color: var(--accent-teal) !important;
+}
+
+/* Separador */
+.border-t {
+    border-color: var(--accent-teal) !important;
+}
+
+span.bg-gray-50 {
+    background-color: var(--card-bg) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Labels */
+label {
+    color: var(--text-primary) !important;
+}
+
+/* Inputs */
+input[type="email"],
+input[type="password"] {
+    background-color: var(--card-bg) !important;
+    border-color: var(--accent-teal) !important;
+    color: var(--text-primary) !important;
+}
+
+input::placeholder {
+    color: var(--text-secondary) !important;
+}
+
+/* Botón de submit */
+button[type="submit"] {
+    background-color: #f59e0b !important; /* Amber */
+    color: white !important;
+}
+
+button[type="submit"]:hover {
+    background-color: #d97706 !important;
+}
+
+/* Enlaces */
+a.text-amber-600 {
+    color: var(--accent-light) !important;
+}
+
+a.text-amber-600:hover {
+    color: var(--accent-teal) !important;
+}
+
+/* Errores */
+p.text-red-600 {
+    color: #ef4444 !important;
+}

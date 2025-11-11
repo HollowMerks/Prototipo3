@@ -17,6 +17,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class EstudiantesPanelProvider extends PanelProvider
@@ -31,6 +32,12 @@ class EstudiantesPanelProvider extends PanelProvider
             ->profile()
             ->colors([
                 'primary' => Color::Amber,
+                'secondary' => Color::Teal,
+                'gray' => Color::Gray,
+                'success' => Color::Green,
+                'danger' => Color::Red,
+                'warning' => Color::Amber,
+                'info' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Estudiantes/Resources'), for: 'App\Filament\Estudiantes\Resources')
             ->discoverPages(in: app_path('Filament/Estudiantes/Pages'), for: 'App\Filament\Estudiantes\Pages')
@@ -56,6 +63,11 @@ class EstudiantesPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->loginRouteSlug('estudiantes/login');
+            ->authGuard('web')
+            ->loginRouteSlug('login')
+            ->routes(function () {
+                Route::get('/auth/google', [\App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle'])->name('google.login');
+                Route::get('/auth/google/callback', [\App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+            });
     }
 }
