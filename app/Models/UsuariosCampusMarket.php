@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
+// ✅ Ahora es el correcto
+
 class UsuariosCampusMarket extends Authenticatable
 {
     use HasFactory, Notifiable;

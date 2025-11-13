@@ -44,10 +44,6 @@ class UsuarioCampusMarketsTable
                         3 => 'Estudiante',
                         default => 'Desconocido',
                     }),
-                TextColumn::make('Genero')->label('Género')->sortable()->searchable(),
-                TextColumn::make('Telefono')->label('Teléfono')->sortable()->searchable(),
-                TextColumn::make('carrera.Nombre_Carrera')->label('Carrera')->sortable()->searchable(),
-                TextColumn::make('carrera.universidad.Nombre_Universidad')->label('Universidad')->sortable()->searchable(),
             ])
             ->filters([
                 //
