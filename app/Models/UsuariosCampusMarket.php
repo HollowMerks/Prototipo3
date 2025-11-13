@@ -20,12 +20,10 @@ class UsuariosCampusMarket extends Authenticatable
     protected $keyType = 'int';
 
     protected $fillable = [
-        'Nombres',
+        'user_id',
         'Apellidos',
         'Genero',
         'Estado',
-        'Correo_Electronico',
-        'Contrasena',
         'Telefono',
         'Foto_de_portada',
         'Foto_de_perfil',
@@ -78,5 +76,10 @@ class UsuariosCampusMarket extends Authenticatable
     public function universidad()
     {
         return $this->belongsTo(Universidades::class, 'Cod_Universidad', 'Cod_Universidad');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -12,13 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usuarios_campus_markets', function (Blueprint $table) {
-            $table->id('ID_Usuario');
-            $table->string('Nombres', 120);
+            $table->id('ID_Usuario');                   // ID de tu tabla personalizada
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');  // referencia a User
             $table->string('Apellidos', 120);
             $table->enum('Genero', ['Hombre', 'Mujer', 'Prefiero no decirlo'])->nullable();
             $table->enum('Estado', ['Habilitado', 'Inhabilitado', 'Baneado', 'Suspendido'])->default('Habilitado');
-            $table->string('Correo_Electronico', 120)->unique();
-            $table->string('Contrasena');
             $table->string('Telefono')->nullable();
             $table->string('Foto_de_portada')->nullable();
             $table->string('Foto_de_perfil')->nullable();
@@ -31,6 +29,7 @@ return new class extends Migration
             $table->foreign('Cod_Carrera')->references('Cod_Carrera')->on('carreras');
             $table->foreign('Cod_Universidad')->references('Cod_Universidad')->on('universidades');
         });
+
     }
 
     // Model logic such as hidden properties or mutators should be placed in the Eloquent model, not in the migration.

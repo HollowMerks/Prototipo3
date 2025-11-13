@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\UsuarioCampusMarkets\Schemas;
 
+use App\Models\User;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -13,16 +14,37 @@ class UsuarioCampusMarketForm
     {
         return $schema
             ->schema([
-                TextInput::make('Nombres')
-                    ->label('Nombres')
+                Select::make('user_id')
+                    ->label('Usuario')
+                    ->relationship('user', 'name')
+                    ->getOptionLabelFromRecordUsing(fn (User $record) => $record->name.' ('.$record->email.')')
+                    ->searchable()
+                    ->preload()
                     ->required()
-                    ->maxLength(120),
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->label('Nombres')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('email')
+                            ->label('Correo Electrónico')
+                            ->email()
+                            ->required()
+                            ->maxLength(255)
+                            ->unique(ignoreRecord: true),
+                        TextInput::make('password')
+                            ->label('Contraseña')
+                            ->password()
+                            ->required()
+                            ->minLength(8)
+                            ->maxLength(255),
+                    ]),
                 TextInput::make('Apellidos')
                     ->label('Apellidos')
                     ->required()
                     ->maxLength(120),
                 Select::make('Genero')
-                    ->label('Genero')
+                    ->label('Género')
                     ->options([
                         'Hombre' => 'Hombre',
                         'Mujer' => 'Mujer',
@@ -39,44 +61,39 @@ class UsuarioCampusMarketForm
                     ])
                     ->default('Habilitado')
                     ->required(),
-                TextInput::make('Correo_Electronico')
-                    ->label('Correo Electrónico')
-                    ->email()
-                    ->required()
-                    ->maxLength(120),
-                TextInput::make('Contrasena')
-                    ->label('Contraseña')
-                    ->required(fn ($context) => $context === 'create')
-                    ->maxLength(255),
                 TextInput::make('Telefono')
                     ->label('Teléfono')
+                    ->tel()
                     ->nullable()
-                    ->maxLength(255),
+                    ->maxLength(20),
                 FileUpload::make('Foto_de_portada')
                     ->label('Foto de Portada')
                     ->image()
+                    ->directory('fotos-portada')
                     ->nullable(),
                 FileUpload::make('Foto_de_perfil')
                     ->label('Foto de Perfil')
                     ->image()
+                    ->directory('fotos-perfil')
+                    ->avatar()
                     ->nullable(),
                 Select::make('Cod_Rol')
                     ->label('Rol')
-                    ->options([
-                        1 => 'SuperAdministrador',
-                        2 => 'Moderador',
-                        3 => 'Estudiante',
-                    ])
-                    ->default(3)
-                    ->required(),
+                    ->relationship('rol', 'Nombre_Rol')
+                    ->required()
+                    ->default(3),
                 Select::make('Cod_Carrera')
                     ->label('Carrera')
                     ->relationship('carrera', 'Nombre_Carrera')
-                    ->required(),
+                    ->required()
+                    ->searchable()
+                    ->preload(),
                 Select::make('Cod_Universidad')
                     ->label('Universidad')
                     ->relationship('universidad', 'Nombre_Universidad')
-                    ->required(),
+                    ->required()
+                    ->searchable()
+                    ->preload(),
             ]);
     }
 }
