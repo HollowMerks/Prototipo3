@@ -32,5 +32,12 @@ class AppServiceProvider extends ServiceProvider
                 @vite("resources/css/custom-login.css")
             ')
         );
+
+        FilamentView::registerRenderHook(
+            'panels::body.end',
+            fn () => Blade::render('
+                @vite("resources/css/export-button.css")
+            ')
+        );
     }
 }

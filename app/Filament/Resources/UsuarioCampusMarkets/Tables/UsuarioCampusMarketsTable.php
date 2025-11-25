@@ -19,31 +19,42 @@ class UsuarioCampusMarketsTable
                 ImageColumn::make('Foto_de_perfil')
                     ->label('Foto de Perfil')
                     ->circular()
-                    ->size(50)
+                    ->size(48)
                     ->extraAttributes(function ($record) {
                         return [
                             'wire:click.prevent' => "Livewire.emit('showPhoto', '".url('storage/'.$record->Foto_de_perfil)."')",
                             'style' => 'cursor:pointer',
                         ];
                     }),
-                TextColumn::make('user.name')->label('Nombres')->sortable()->searchable(),
-                TextColumn::make('Apellidos')->label('Apellidos')->sortable()->searchable(),
-                TextColumn::make('user.email')->label('Correo Electrónico')->sortable()->searchable(),
-                TextColumn::make('Telefono')->label('Teléfono')->sortable()->searchable(),
-                TextColumn::make('Estado')->label('Estado'),
-                TextColumn::make('Genero')->label('Género')->sortable()->searchable(),
-                TextColumn::make('carrera.Nombre_Carrera')->label('Carrera')->sortable()->searchable(),
-                TextColumn::make('carrera.universidad.Nombre_Universidad')->label('Universidad')->sortable()->searchable(),
-                TextColumn::make('Cod_Rol')
-                    ->label('Rol')
+
+                TextColumn::make('user.name')
+                    ->label('Nombres')
                     ->sortable()
-                    ->searchable()
-                    ->formatStateUsing(fn ($state) => match ($state) {
-                        1 => 'SuperAdministrador',
-                        2 => 'Moderador',
-                        3 => 'Estudiante',
-                        default => 'Desconocido',
-                    }),
+                    ->searchable(),
+
+                TextColumn::make('Apellidos')
+                    ->label('Apellidos')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('user.email')
+                    ->label('Correo Electrónico')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('Estado')
+                    ->label('Estado')
+                    ->sortable(),
+
+                TextColumn::make('carrera.Nombre_Carrera')
+                    ->label('Carrera')
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('carrera.universidad.Nombre_Universidad')
+                    ->label('Universidad')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -66,6 +77,7 @@ class UsuarioCampusMarketsTable
                         $record->save();
                     }),
             ])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

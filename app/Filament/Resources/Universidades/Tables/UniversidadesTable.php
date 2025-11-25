@@ -2,10 +2,15 @@
 
 namespace App\Filament\Resources\Universidades\Tables;
 
+use App\Exports\UniversidadesExport;
 use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\Action;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UniversidadesTable
 {
@@ -71,6 +76,35 @@ class UniversidadesTable
             ])
             ->recordActions([
                 EditAction::make(),
+            ])
+            ->headerActions([
+                Action::make('reporte_pdf')
+                    ->label('Descargar PDF')
+                    ->url(route('reporte.universidades.pdf'))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-document-text')
+                    ->color('success'),
+
+                Action::make('reporte_imagen')
+                    ->label('Descargar Imagen')
+                    ->url(route('reporte.universidades.imagen'))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-photo')
+                    ->color('success'),
+
+                Action::make('export_excel')
+                    ->label('Descargar Excel')
+                    ->action(function () {
+                        return Excel::download(new UniversidadesExport, 'universidades.xlsx');
+                    })
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('success')
+                    ->tooltip('Descargar reporte de universidades en Excel'),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

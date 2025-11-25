@@ -4,6 +4,9 @@ namespace App\Filament\Resources\UsuarioCampusMarkets\Schemas;
 
 use App\Models\Carrera;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewUserWelcomeMail;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -34,7 +37,22 @@ class UsuarioCampusMarketForm
                             ->maxLength(255)
                             ->unique(table: 'users', column: 'email'),
                     ])
-                    ->createOptionUsing(fn (array $data): int => User::create($data)->getKey()),
+                    ->createOptionUsing(function (array $data): int {
+                        $plain = Str::random(12);
+                        $user = User::create(array_merge($data, [
+                            'password' => bcrypt($plain),
+                        ]));
+
+                        // Enviar correo de bienvenida con la contraseña temporal
+                        try {
+                            Mail::to($user->email)->send(new NewUserWelcomeMail($user, $plain));
+                        } catch (\Exception $e) {
+                            // No romper el flujo si el correo falla; registrar el error
+                            \Log::error('Error al enviar correo de bienvenida a ' . ($user->email ?? 'null') . ': ' . $e->getMessage());
+                        }
+
+                        return $user->getKey();
+                    }),
 
                 TextInput::make('Apellidos')
                     ->label('Apellidos')

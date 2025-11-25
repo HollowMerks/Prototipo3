@@ -27,7 +27,14 @@ class AdminNotificationForm
                     ->live(),
                 Select::make('ID_Usuario')
                     ->label('Seleccionar Usuario')
-                    ->options(UsuariosCampusMarket::all()->pluck('Nombres', 'ID_Usuario'))
+                    ->options(
+                        UsuariosCampusMarket::with('user')
+                            ->whereHas('user', fn ($q) => $q->whereNotNull('email'))
+                            ->get()
+                            ->mapWithKeys(fn ($usuario) => [
+                                $usuario->ID_Usuario => $usuario->user->name . ' (' . $usuario->user->email . ')'
+                            ])
+                    )
                     ->searchable()
                     ->preload()
                     ->required()

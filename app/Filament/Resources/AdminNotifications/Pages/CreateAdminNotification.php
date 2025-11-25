@@ -9,10 +9,14 @@ use App\Models\UsuariosCampusMarket;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class CreateAdminNotification extends CreateRecord
 {
     protected static string $resource = AdminNotificationResource::class;
+
+    protected bool $sentWithImage = false;
 
     protected function handleRecordCreation(array $data): Model
     {
@@ -39,15 +43,34 @@ class CreateAdminNotification extends CreateRecord
                 'ID_Usuario' => $usuario->ID_Usuario,
             ]));
 
-            // Enviar correo electrónico
-            if ($usuario->Correo_Electronico) {
-                Mail::to($usuario->Correo_Electronico)->send(new AdminNotificationMail($notificacion));
+            // Enviar correo electrónico usando el email del usuario desde la tabla users
+            if ($usuario->user && $usuario->user->email) {
+                try {
+                    Mail::to($usuario->user->email)->send(new AdminNotificationMail($notificacion));
+                    // Marcar como enviado y registrar fecha
+                    $notificacion->Estado_Notificacion = 'Enviado';
+                    $notificacion->Fecha_Envio = now();
+                    $notificacion->save();
+                } catch (\Exception $e) {
+                    // Log del error si el envío falla
+                    Log::error('Error al enviar notificación a ' . $usuario->user->email . ': ' . $e->getMessage());
+                    $notificacion->Estado_Notificacion = 'Error';
+                    $notificacion->save();
+                }
             }
 
             $notificaciones[] = $notificacion;
         }
 
+        // Si la notificación incluye una imagen, marcar para redirección al formulario (enviar más)
+        $this->sentWithImage = !empty($data['imgen']);
+
         // Retornar la primera notificación creada para compatibilidad con Filament
         return $notificaciones[0] ?? null;
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->sentWithImage ? $this->getResource()::getUrl('create') : $this->getResource()::getUrl('index');
     }
 }

@@ -5,6 +5,10 @@ namespace App\Filament\Resources\AdminNotifications\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\Action;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AdminNotificationsExport;
+use Illuminate\Support\Facades\URL;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -40,6 +44,19 @@ class AdminNotificationsTable
                     ->dateTime('d/m/Y H:i'),
             ])->actions([
             EditAction::make(),
+        ])->headerActions([
+            Action::make('reporte_pdf')
+                ->label('Descargar PDF')
+                ->url(route('reporte.notificaciones.pdf'))
+                ->openUrlInNewTab()
+                ->icon('heroicon-o-document-text')
+                ->color('success'),
+
+            Action::make('export_excel')
+                ->label('Descargar Excel')
+                ->action(fn () => Excel::download(new AdminNotificationsExport, 'notificaciones_' . date('Y-m-d') . '.xlsx'))
+                ->icon('heroicon-o-document-arrow-down')
+                ->color('success'),
         ])->bulkActions([
             BulkActionGroup::make([
                 DeleteBulkAction::make(),

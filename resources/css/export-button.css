@@ -1,0 +1,70 @@
+/* Estilos para botones de exportación */
+
+.filament-button[data-action="export_excel"] {
+    @apply relative inline-flex items-center justify-center font-semibold outline-none transition duration-250 ease-in-out shadow-sm;
+    @apply px-4 py-2.5 rounded-lg text-sm;
+}
+
+/* Botón de exportación - Carreras (verde) */
+.filament-button[data-action="export_excel"].bg-success {
+    @apply bg-gradient-to-b from-emerald-500 to-emerald-600 text-white;
+    @apply hover:from-emerald-600 hover:to-emerald-700 hover:shadow-md;
+    @apply active:from-emerald-700 active:to-emerald-800 active:shadow-sm;
+    @apply focus:ring-2 focus:ring-emerald-300;
+}
+
+/* Botón de exportación - Universidades (azul) */
+.filament-button[data-action="export_excel"].bg-info {
+    @apply bg-gradient-to-b from-blue-500 to-blue-600 text-white;
+    @apply hover:from-blue-600 hover:to-blue-700 hover:shadow-md;
+    @apply active:from-blue-700 active:to-blue-800 active:shadow-sm;
+    @apply focus:ring-2 focus:ring-blue-300;
+}
+
+/* Ícono de descarga */
+.filament-button[data-action="export_excel"] svg {
+    @apply w-5 h-5 mr-2;
+    @apply transition-transform duration-200;
+}
+
+.filament-button[data-action="export_excel"]:hover svg {
+    @apply -translate-y-0.5;
+}
+
+/* Tooltip personalizado */
+.filament-button[data-action="export_excel"]::before {
+    content: attr(data-tooltip);
+    @apply invisible absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-md bg-gray-900 text-white text-xs whitespace-nowrap;
+    @apply transition opacity-0 duration-200;
+}
+
+.filament-button[data-action="export_excel"]:hover::before {
+    @apply visible opacity-100;
+}
+
+/* Estado deshabilitado */
+.filament-button[data-action="export_excel"]:disabled {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+/* Animación de carga */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.filament-button[data-action="export_excel"].is-loading svg {
+    animation: spin 1s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filament-button[data-action="export_excel"] {
+        @apply px-3 py-2 text-xs;
+    }
+
+    .filament-button[data-action="export_excel"] svg {
+        @apply w-4 h-4 mr-1;
+    }
+}
