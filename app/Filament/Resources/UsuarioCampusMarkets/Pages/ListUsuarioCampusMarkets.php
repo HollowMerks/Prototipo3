@@ -15,28 +15,7 @@ class ListUsuarioCampusMarkets extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('Crear Nuevo Usuario Campus Market'),
-
-            Actions\Action::make('reporte_pdf')
-                ->label('Descargar PDF')
-                ->url(route('reporte.usuarios.pdf'))
-                ->openUrlInNewTab()
-                ->icon('heroicon-o-document-text')
-                ->color('success'),
-
-            Actions\Action::make('reporte_excel')
-                ->label('Descargar Excel')
-                ->url(route('reporte.usuarios.excel'))
-                ->openUrlInNewTab()
-                ->icon('heroicon-o-document-arrow-down')
-                ->color('success'),
-            Actions\Action::make('reporte_imagen')
-                ->label('Descargar Imagen')
-                ->url(route('reporte.usuarios.imagen'))
-                ->openUrlInNewTab()
-                ->icon('heroicon-o-photo')
-                ->color('success'),
+            // Actions moved to the table headerActions so buttons appear together
         ];
     }
 }

@@ -3,10 +3,18 @@
 use App\Http\Controllers\ReporteUsuarioController;
 use App\Http\Controllers\CarrerasReporteController;
 use App\Http\Controllers\UniversidadesReporteController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// Rutas de autenticación - FUERA de Filament, sin middlewares complejos
+Route::middleware('web')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.post')->middleware('guest');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 Route::get('/reporte/usuarios/pdf', [ReporteUsuarioController::class, 'generarPDF'])->name('reporte.usuarios.pdf');
@@ -30,3 +38,7 @@ use App\Http\Controllers\AdminNotificationsReporteController;
 
 Route::get('/reporte/notificaciones/pdf', [AdminNotificationsReporteController::class, 'generarPDF'])->name('reporte.notificaciones.pdf');
 Route::get('/reporte/notificaciones/excel', [AdminNotificationsReporteController::class, 'generarExcel'])->name('reporte.notificaciones.excel');
+// Rutas para reportes de Categorías Artículos
+use App\Http\Controllers\CategoriasArticulosReporteController;
+Route::get('/reporte/categorias/pdf', [CategoriasArticulosReporteController::class, 'generarPDF'])->name('reporte.categorias.pdf');
+Route::get('/reporte/categorias/excel', [CategoriasArticulosReporteController::class, 'generarExcel'])->name('reporte.categorias.excel');

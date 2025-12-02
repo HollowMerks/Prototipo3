@@ -12,27 +12,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usuarios_campus_markets', function (Blueprint $table) {
-            $table->id('ID_Usuario');                   // ID de tu tabla personalizada
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');  // referencia a User
-            $table->string('Apellidos', 120);
-            $table->enum('Genero', ['Hombre', 'Mujer', 'Prefiero no decirlo'])->nullable();
-            $table->enum('Estado', ['Habilitado', 'Inhabilitado', 'Baneado', 'Suspendido'])->default('Habilitado');
+            $table->id('ID_Usuario');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('Apellidos')->nullable();
+            $table->enum('Genero', ['Masculino', 'Femenino', 'Otro'])->nullable();
+            $table->enum('Estado', ['Habilitado', 'Inhabilitado'])->default('Habilitado');
             $table->string('Telefono')->nullable();
             $table->string('Foto_de_portada')->nullable();
             $table->string('Foto_de_perfil')->nullable();
             $table->unsignedBigInteger('Cod_Rol')->default(3);
             $table->unsignedBigInteger('Cod_Carrera');
             $table->unsignedBigInteger('Cod_Universidad');
+
+            // timestamps solo UNA VEZ
             $table->timestamps();
 
+            // foreign keys
             $table->foreign('Cod_Rol')->references('Cod_Rol')->on('roles');
             $table->foreign('Cod_Carrera')->references('Cod_Carrera')->on('carreras');
             $table->foreign('Cod_Universidad')->references('Cod_Universidad')->on('universidades');
         });
-
     }
-
-    // Model logic such as hidden properties or mutators should be placed in the Eloquent model, not in the migration.
 
     /**
      * Reverse the migrations.

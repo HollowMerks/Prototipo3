@@ -23,6 +23,9 @@
 >
     {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::PAGE_START, scopes: $this->getRenderHookScopes()) }}
 
+    {{-- Custom top-left alert (shows flash messages set by resource pages) --}}
+    @includeWhen(session()->has('custom_alert'), 'vendor.filament-panels.components.custom-alert')
+
     <div class="fi-page-header-main-ctn">
         @if ($subNavigation)
             <div

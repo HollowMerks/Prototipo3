@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('admin_notificaciones', function (Blueprint $table) {
             $table->id('ID_Notificacion');
-            $table->foreignId('ID_Usuario')->constrained('usuarios_campus_markets', 'ID_Usuario');
+            $table->unsignedBigInteger('ID_Usuario');
+            $table->foreign('ID_Usuario')->references('id')->on('usuarios_campus_markets')->onDelete('cascade');
             $table->string('Titulo_Notificacion', 150);
             $table->text('Mensaje_Notificacion');
             $table->string('imgen')->nullable();

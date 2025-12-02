@@ -20,6 +20,12 @@ class CategoriasArticulosForm
                 Textarea::make('Descripcion_Categoria')
                     ->label('Descripción')
                     ->nullable(),
+
+                \Filament\Forms\Components\FileUpload::make('Foto_Categoria')
+                    ->label('Foto de la Categoría')
+                    ->image()
+                    ->directory('categorias-articulos')
+                    ->nullable(),
                 Select::make('Cod_Carrera')
                     ->label('Carrera')
                     ->relationship('carrera', 'Nombre_Carrera')

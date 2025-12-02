@@ -6,6 +6,7 @@ use App\Filament\Resources\Universidades\UniversidadesResource;
 use Filament\Actions;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Session;
 
 class EditUniversidades extends EditRecord
 {
@@ -19,11 +20,6 @@ class EditUniversidades extends EditRecord
         ];
     }
 
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
-    }
-
     protected function getSavedNotificationTitle(): ?string
     {
         return 'Universidad actualizada exitosamente';
@@ -33,5 +29,16 @@ class EditUniversidades extends EditRecord
     {
         return parent::getSaveFormAction()
             ->label('Guardar Cambios');
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        $name = $this->record->Nombre_Universidad ?? null;
+        Session::flash('custom_alert', [
+            'message' => $name ? "Se actualizó la universidad: <strong>{$name}</strong>" : 'Universidad actualizada',
+            'type' => 'success',
+        ]);
+
+        return $this->getResource()::getUrl('index');
     }
 }

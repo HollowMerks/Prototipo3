@@ -46,6 +46,7 @@ class CategoriasArticulosResource extends Resource
             'index' => ListCategoriasArticulos::route('/'),
             'create' => CreateCategoriasArticulos::route('/create'),
             'edit' => EditCategoriasArticulos::route('/{record}/edit'),
+            'trashed' => \App\Filament\Resources\CategoriasArticulos\Pages\ListTrashedCategoriasArticulos::route('/trashed'),
         ];
     }
 }

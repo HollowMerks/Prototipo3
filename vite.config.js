@@ -9,11 +9,14 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: ['resources/css/app.css',
-                    'resources/js/app.js',
-                    'resources/css/custom-login.css',
-                    'resources/css/campus-market.css',
-                    'resources/css/filament-login.css',],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/css/custom-login.css',
+                'resources/css/campus-market.css',
+                'resources/css/filament-login.css',
+                'resources/css/export-button.css',
+            ],
             refresh: true,
         }),
         tailwindcss(),

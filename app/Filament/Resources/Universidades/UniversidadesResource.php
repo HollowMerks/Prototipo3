@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Universidades;
 
 use App\Filament\Resources\Universidades\Pages\EditUniversidades;
 use App\Filament\Resources\Universidades\Pages\ListUniversidades;
+use App\Filament\Resources\Universidades\Pages\ListTrashedUniversidades;
 use App\Filament\Resources\Universidades\Schemas\UniversidadesForm;
 use App\Filament\Resources\Universidades\Tables\UniversidadesTable;
 use App\Models\Universidades;
@@ -45,6 +46,7 @@ class UniversidadesResource extends Resource
     {
         return [
             'index' => ListUniversidades::route('/'),
+            'trashed' => ListTrashedUniversidades::route('/trashed'),
             'edit' => EditUniversidades::route('/{record}/edit'),
         ];
     }

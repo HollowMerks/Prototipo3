@@ -52,10 +52,13 @@
     <div class="content">
         <p>{{ $mensaje }}</p>
 
-        @if($imagen)
-            <p>
-                <img src="{{ asset('storage/' . $imagen) }}" alt="Imagen de notificación" style="max-width: 100%; height: auto;">
-            </p>
+        @if($imagenBase64 && $mimeType)
+            <!-- Usar base64 inline como fallback principal -->
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="data:{{ $mimeType }};base64,{{ $imagenBase64 }}"
+                     alt="Imagen de notificación"
+                     style="max-width: 100%; height: auto; border-radius: 5px; display: block; margin: 0 auto;">
+            </div>
         @endif
     </div>
 

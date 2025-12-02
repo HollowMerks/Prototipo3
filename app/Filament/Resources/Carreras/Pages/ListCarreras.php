@@ -15,9 +15,7 @@ class ListCarreras extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
-                ->label('Crear Nueva Carrera')
-                ->slideOver(false),
+            // CreateAction moved to table headerActions so it appears alongside downloads
         ];
     }
 }

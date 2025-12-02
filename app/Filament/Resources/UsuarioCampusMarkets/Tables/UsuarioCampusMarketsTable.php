@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\UsuarioCampusMarkets\Tables;
 
 use Filament\Actions\Action;
+use Filament\Actions\CreateAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -76,6 +77,39 @@ class UsuarioCampusMarketsTable
                         $record->Estado = $record->Estado === 'Habilitado' ? 'Inhabilitado' : 'Habilitado';
                         $record->save();
                     }),
+            ])
+
+            ->headerActions([
+                Action::make('recargar')
+                    ->label('Recargar')
+                    ->icon('heroicon-o-arrow-path')
+                    ->url(fn () => url()->current())
+                    ->color('secondary'),
+
+                CreateAction::make()
+                    ->label('Crear Nuevo Usuario Campus Market')
+                    ->slideOver(false),
+
+                Action::make('reporte_pdf')
+                    ->label('Descargar PDF')
+                    ->url(route('reporte.usuarios.pdf'))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-document-text')
+                    ->color('success'),
+
+                Action::make('reporte_excel')
+                    ->label('Descargar Excel')
+                    ->url(route('reporte.usuarios.excel'))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('success'),
+
+                Action::make('reporte_imagen')
+                    ->label('Descargar Imagen')
+                    ->url(route('reporte.usuarios.imagen'))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-photo')
+                    ->color('success'),
             ])
 
             ->toolbarActions([

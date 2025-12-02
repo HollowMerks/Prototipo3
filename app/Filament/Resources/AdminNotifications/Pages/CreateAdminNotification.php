@@ -21,19 +21,24 @@ class CreateAdminNotification extends CreateRecord
     protected function handleRecordCreation(array $data): Model
     {
         $tipoEnvio = $data['tipo_envio'];
-        unset($data['tipo_envio']);
+        $codRol = $data['Cod_Rol'] ?? null;
 
         $usuarios = [];
+        $destinatarioDescripcion = '';
 
         if ($tipoEnvio === 'specific_user') {
             $usuarios = [UsuariosCampusMarket::find($data['ID_Usuario'])];
-            unset($data['ID_Usuario'], $data['Cod_Rol']);
+            if (!empty($usuarios[0]->user->email)) {
+                $destinatarioDescripcion = $usuarios[0]->user->email;
+            }
         } elseif ($tipoEnvio === 'by_role') {
-            $usuarios = UsuariosCampusMarket::where('Cod_Rol', $data['Cod_Rol'])->get();
-            unset($data['ID_Usuario'], $data['Cod_Rol']);
+            $usuarios = UsuariosCampusMarket::where('Cod_Rol', $codRol)->get();
+            // Obtener nombre del rol
+            $rol = \App\Models\Roles::find($codRol);
+            $destinatarioDescripcion = $rol ? "Rol: {$rol->Nombre_Rol}" : "Rol ID: {$codRol}";
         } elseif ($tipoEnvio === 'all_users') {
             $usuarios = UsuariosCampusMarket::all();
-            unset($data['ID_Usuario'], $data['Cod_Rol']);
+            $destinatarioDescripcion = 'Todos los usuarios';
         }
 
         $notificaciones = [];
@@ -41,6 +46,9 @@ class CreateAdminNotification extends CreateRecord
         foreach ($usuarios as $usuario) {
             $notificacion = Admin_notificaciones::create(array_merge($data, [
                 'ID_Usuario' => $usuario->ID_Usuario,
+                'tipo_envio' => $tipoEnvio,
+                'Cod_Rol' => $codRol,
+                'Destinatario_Notificacion' => $destinatarioDescripcion,
             ]));
 
             // Enviar correo electrónico usando el email del usuario desde la tabla users
@@ -62,15 +70,25 @@ class CreateAdminNotification extends CreateRecord
             $notificaciones[] = $notificacion;
         }
 
+        // Flash a custom alert summarizing the creation
+        $count = count($notificaciones);
+        if ($count > 0) {
+            Session::flash('custom_alert', [
+                'message' => "Se crearon {$count} notificación(es) administrativas.",
+                'type' => 'success',
+            ]);
+        }
+
         // Si la notificación incluye una imagen, marcar para redirección al formulario (enviar más)
         $this->sentWithImage = !empty($data['imgen']);
 
-        // Retornar la primera notificación creada para compatibilidad con Filament
+        // Retornar la primera notificaci�n creada para compatibilidad con Filament
         return $notificaciones[0] ?? null;
     }
 
     protected function getRedirectUrl(): string
     {
-        return $this->sentWithImage ? $this->getResource()::getUrl('create') : $this->getResource()::getUrl('index');
+        // Siempre redirigir a la tabla de notificaciones después de enviar
+        return $this->getResource()::getUrl('index');
     }
 }

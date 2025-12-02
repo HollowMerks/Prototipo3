@@ -7,10 +7,12 @@ use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Action;
+use Filament\Actions\CreateAction;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Maatwebsite\Excel\Facades\Excel;
+use Redirect;
 
 class UniversidadesTable
 {
@@ -75,9 +77,54 @@ class UniversidadesTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                Action::make('recuperar')
+                    ->label('Recuperar')
+                    ->icon('heroicon-o-arrow-path')
+                    ->color('success')
+                    ->visible(fn ($record) => $record->trashed())
+                    ->requiresConfirmation()
+                    ->modalHeading('¿Recuperar esta universidad?')
+                    ->modalDescription('La universidad será restaurada y volverá a la lista activa.')
+                    ->modalSubmitActionLabel('Recuperar')
+                    ->action(function ($record) {
+                        try {
+                            $record->restore();
+                            session()->flash('custom_alert', ['message' => 'Universidad recuperada correctamente.', 'type' => 'success']);
+                            return redirect()->route('filament.admin.resources.universidades.index');
+                        } catch (\Exception $e) {
+                            session()->flash('custom_alert', ['message' => 'Error al recuperar la universidad.', 'type' => 'danger']);
+                        }
+                    }),
+
+                EditAction::make()
+                    ->visible(fn ($record) => ! $record->trashed()),
+
+                Action::make('eliminar')
+                    ->label('Eliminar')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->visible(fn ($record) => ! $record->trashed())
+                    ->requiresConfirmation()
+                    ->action(function ($record) {
+                        try {
+                            $record->delete();
+                            session()->flash('custom_alert', ['message' => 'Universidad archivada correctamente.', 'type' => 'warning']);
+                        } catch (\Exception $e) {
+                            session()->flash('custom_alert', ['message' => 'Error al archivar la universidad.', 'type' => 'danger']);
+                        }
+                    }),
             ])
             ->headerActions([
+                Action::make('recargar')
+                    ->label('Recargar')
+                    ->icon('heroicon-o-arrow-path')
+                    ->url(fn () => url()->current())
+                    ->color('secondary'),
+
+                CreateAction::make()
+                    ->label('Crear Nueva Universidad')
+                    ->slideOver(false),
+
                 Action::make('reporte_pdf')
                     ->label('Descargar PDF')
                     ->url(route('reporte.universidades.pdf'))
@@ -100,6 +147,14 @@ class UniversidadesTable
                     ->icon('heroicon-o-document-arrow-down')
                     ->color('success')
                     ->tooltip('Descargar reporte de universidades en Excel'),
+
+                Action::make('ver_archivadas')
+                    ->label(fn () => str_contains(url()->current(), '/trashed') ? 'Ver Activas' : 'Ver Archivadas')
+                    ->url(fn () => str_contains(url()->current(), '/trashed')
+                        ? \App\Filament\Resources\Universidades\UniversidadesResource::getUrl('index')
+                        : \App\Filament\Resources\Universidades\UniversidadesResource::getUrl('trashed'))
+                    ->icon(fn () => str_contains(url()->current(), '/trashed') ? 'heroicon-o-check-circle' : 'heroicon-o-archive-box')
+                    ->color(fn () => str_contains(url()->current(), '/trashed') ? 'success' : 'danger'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

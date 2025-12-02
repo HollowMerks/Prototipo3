@@ -4,12 +4,15 @@ namespace App\Filament\Resources\UsuarioCampusMarkets\Schemas;
 
 use App\Models\Carrera;
 use App\Models\User;
+use App\Helpers\PhoneCountries;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUserWelcomeMail;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Grid;
 use Filament\Schemas\Schema;
 
 class UsuarioCampusMarketForm
@@ -48,7 +51,7 @@ class UsuarioCampusMarketForm
                             Mail::to($user->email)->send(new NewUserWelcomeMail($user, $plain));
                         } catch (\Exception $e) {
                             // No romper el flujo si el correo falla; registrar el error
-                            \Log::error('Error al enviar correo de bienvenida a ' . ($user->email ?? 'null') . ': ' . $e->getMessage());
+                            \Illuminate\Support\Facades\Log::error('Error al enviar correo de bienvenida a ' . ($user->email ?? 'null') . ': ' . $e->getMessage());
                         }
 
                         return $user->getKey();
@@ -59,12 +62,27 @@ class UsuarioCampusMarketForm
                     ->required()
                     ->maxLength(120),
 
+                Select::make('Pais_Telefono')
+                    ->label('País')
+                    ->options(PhoneCountries::getOptions())
+                    ->default('BO')
+                    ->required()
+                    ->columnSpan(1),
+
+                TextInput::make('Telefono')
+                    ->label('Teléfono')
+                    ->tel()
+                    ->nullable()
+                    ->maxLength(20)
+                    ->columnSpan(1)
+                    ->prefix(fn ($get) => PhoneCountries::getCountryCode($get('Pais_Telefono')) ?? '+591'),
+
                 Select::make('Genero')
                     ->label('Género')
                     ->options([
-                        'Hombre' => 'Hombre',
-                        'Mujer' => 'Mujer',
-                        'Prefiero no decirlo' => 'Prefiero no decirlo',
+                        'Masculino' => 'Masculino',
+                        'Femenino' => 'Femenino',
+                        'Otro' => 'Otro',
                     ])
                     ->nullable(),
 
@@ -73,8 +91,6 @@ class UsuarioCampusMarketForm
                     ->options([
                         'Habilitado' => 'Habilitado',
                         'Inhabilitado' => 'Inhabilitado',
-                        'Baneado' => 'Baneado',
-                        'Suspendido' => 'Suspendido',
                     ])
                     ->default('Habilitado')
                     ->required(),
@@ -100,7 +116,7 @@ class UsuarioCampusMarketForm
 
                 Select::make('Cod_Rol')
                     ->label('Rol')
-                    ->relationship('rol', 'Nombre_Rol')
+                    ->options(fn () => \App\Models\Roles::select('Cod_Rol', 'Nombre_Rol')->distinct()->pluck('Nombre_Rol', 'Cod_Rol'))
                     ->required()
                     ->default(3),
 

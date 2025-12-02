@@ -15,9 +15,7 @@ class ListUniversidades extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make()
-                ->label('Crear Nueva Universidad')
-                ->slideOver(false),
+            // CreateAction moved to table headerActions so it appears alongside downloads
         ];
 
     }

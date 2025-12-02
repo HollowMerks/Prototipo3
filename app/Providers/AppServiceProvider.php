@@ -2,13 +2,25 @@
 
 namespace App\Providers;
 
+use App\Models\UsuariosCampusMarket;
+use App\Policies\UsuariosCampusMarketPolicy;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        UsuariosCampusMarket::class => UsuariosCampusMarketPolicy::class,
+    ];
+
     /**
      * Register any application services.
      */
@@ -22,6 +34,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Registrar policies
+        foreach ($this->policies as $model => $policy) {
+            Gate::policy($model, $policy);
+        }
+
         if (! app()->environment('local')) {
             URL::forceScheme('https');
         }

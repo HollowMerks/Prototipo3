@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Carreras;
 
 use App\Filament\Resources\Carreras\Pages\EditCarreras;
 use App\Filament\Resources\Carreras\Pages\ListCarreras;
+use App\Filament\Resources\Carreras\Pages\ListTrashedCarreras;
 use App\Filament\Resources\Carreras\Schemas\CarrerasForm;
 use App\Filament\Resources\Carreras\Tables\CarrerasTable;
 use App\Models\Carrera;
@@ -50,6 +51,7 @@ class CarrerasResource extends Resource
     {
         return [
             'index' => ListCarreras::route('/'),
+            'trashed' => ListTrashedCarreras::route('/trashed'),
             'edit' => EditCarreras::route('/{record}/edit'),
         ];
     }

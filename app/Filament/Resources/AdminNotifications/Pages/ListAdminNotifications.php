@@ -14,7 +14,7 @@ class ListAdminNotifications extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            // CreateAction moved to table headerActions so it appears alongside downloads
         ];
     }
 
